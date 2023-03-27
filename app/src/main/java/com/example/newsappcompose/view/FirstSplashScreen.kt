@@ -44,8 +44,8 @@ fun FirstSplashScreen(onClick: () -> Unit){
         timer.start()
 
         //For LottieAnimation
-        val composition by rememberLottieComposition(spec = LottieCompositionSpec.Url("https://assets4.lottiefiles.com/private_files/lf30_cbizhsdy.json"))
-        LottieAnimation(composition = composition, iterations =LottieConstants.IterateForever )
+       // val composition by rememberLottieComposition(spec = LottieCompositionSpec.Url("https://assets4.lottiefiles.com/private_files/lf30_cbizhsdy.json"))
+        // LottieAnimation(composition = composition, iterations =LottieConstants.IterateForever )
 
 
         

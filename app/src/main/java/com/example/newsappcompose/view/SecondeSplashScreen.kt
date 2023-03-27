@@ -39,8 +39,8 @@ fun SecondeSplashScreen(navController: NavHostController){
 
         //For LottieAnimation
 
-        val composition by rememberLottieComposition(spec = LottieCompositionSpec.Url("https://assets2.lottiefiles.com/packages/lf20_2LdLki.json"))
-        LottieAnimation(composition = composition, iterations =LottieConstants.IterateForever )
+        //val composition by rememberLottieComposition(spec = LottieCompositionSpec.Url("https://assets2.lottiefiles.com/packages/lf20_2LdLki.json"))
+        //LottieAnimation(composition = composition, iterations =LottieConstants.IterateForever )
 
         Spacer(modifier = Modifier.padding(3.dp))
 
