@@ -11,16 +11,15 @@ interface NewsAPI {
 
     //https://newsapi.org/v2/everything?q=Apple&from=2023-03-25&sortBy=popularity&apiKey=d78074c607ce4e3dbcac74b29a07df19
     //https://newsapi.org/v2/top-headlines?country=us&apiKey=API_KEY
+    //https://newsapi.org/v2/top-headlines?country=us&apiKey=API_KEY
 
     //for ListScreen
     @GET("v2/top-headlines")
     fun getAllNews(
         @Query("country")
-        countryCode: String = "us",
-        @Query("page")
-        pageNumber : Int = 1,
+        country: String,
         @Query("apiKey")
-        apiKEy: String = API_KEY
+        apiKey: String = API_KEY
     ): NewsModel
 
 

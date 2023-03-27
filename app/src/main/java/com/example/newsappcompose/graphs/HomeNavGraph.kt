@@ -8,7 +8,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.newsappcompose.BottomBarScreen
 import com.example.newsappcompose.view.NewsDetailsScreen
+import com.example.newsappcompose.view.NewsList
 import com.example.newsappcompose.view.ScreenContent
+
 
 
 @Composable
@@ -19,12 +21,7 @@ fun HomeNavGraph(navController: NavHostController) {
         startDestination = BottomBarScreen.Home.route
     ) {
         composable(route = BottomBarScreen.Home.route) {
-            ScreenContent(
-                name = BottomBarScreen.Home.route,
-                onClick = {
-                    navController.navigate(Graph.DETAILS)
-                }
-            )
+            NewsList(navController = navController)
         }
         composable(route = BottomBarScreen.SEARCH.route) {
             ScreenContent(

@@ -14,7 +14,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.findNavController
 import com.example.newsappcompose.graphs.RootNavigationGraph
 import com.example.newsappcompose.ui.theme.NewsAppComposeTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
