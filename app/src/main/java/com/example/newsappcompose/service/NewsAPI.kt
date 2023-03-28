@@ -14,17 +14,17 @@ interface NewsAPI {
     //https://newsapi.org/v2/top-headlines?country=us&apiKey=API_KEY
 
     //for ListScreen
-    @GET("v2/top-headlines")
+    @GET("top-headlines")
     fun getAllNews(
         @Query("country")
-        country: String,
+        country: String = "us",
         @Query("apiKey")
         apiKey: String = API_KEY
     ): NewsModel
 
 
     //for SearchScreen
-    @GET("v2/everything")
+    @GET("everything")
     fun getSearchNews(
         @Query("q")
         searchQuery: String,

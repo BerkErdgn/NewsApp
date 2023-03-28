@@ -28,11 +28,11 @@ import com.example.newsappcompose.ui.theme.customGrey
 import com.example.newsappcompose.viewmodel.HomeViewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.unit.sp
-
+import androidx.navigation.NavController
 
 
 @Composable
-fun NewsList(navController: NavHostController,viewModel: HomeViewModel = hiltViewModel()){
+fun NewsList(navController: NavController,viewModel: HomeViewModel = hiltViewModel()){
     val articleList by remember {viewModel.newsList}
     val errorMessage by remember {viewModel.errorMessage}
     val isLoading by remember {viewModel.isLoading}
@@ -55,7 +55,7 @@ fun NewsList(navController: NavHostController,viewModel: HomeViewModel = hiltVie
 
 
 @Composable
-fun NewsListView(articles:List<Article>,navController: NavHostController){
+fun NewsListView(articles:List<Article>,navController: NavController){
     LazyColumn(contentPadding = PaddingValues(5.dp)){
         items(articles){ article ->
             NewsRow(navController = navController, article = article)
@@ -65,7 +65,7 @@ fun NewsListView(articles:List<Article>,navController: NavHostController){
 }
 
 @Composable
-fun NewsRow(navController: NavHostController, article : Article){
+fun NewsRow(navController: NavController, article : Article){
     Row(
         modifier = Modifier
             .fillMaxWidth()
