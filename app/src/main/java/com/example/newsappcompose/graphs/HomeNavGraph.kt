@@ -1,5 +1,6 @@
 package com.example.newsappcompose.graphs
 
+import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -8,8 +9,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.newsappcompose.BottomBarScreen
 import com.example.newsappcompose.view.NewsDetailsScreen
-import com.example.newsappcompose.view.NewsList
 import com.example.newsappcompose.view.ScreenContent
+import com.example.newsappcompose.view.NewsList
 
 
 
@@ -21,7 +22,8 @@ fun HomeNavGraph(navController: NavHostController) {
         startDestination = BottomBarScreen.Home.route
     ) {
         composable(route = BottomBarScreen.Home.route) {
-            NewsList(navController = navController)
+                NewsList(navController = navController)
+
         }
         composable(route = BottomBarScreen.SEARCH.route) {
             ScreenContent(
