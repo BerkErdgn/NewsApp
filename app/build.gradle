@@ -48,6 +48,8 @@ android {
     }
 }
 
+def retrofitVersion = '2.9.0'
+def rxJavaVersion = '2.1.1'
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -95,6 +97,14 @@ dependencies {
 
     //Lottie in Compose
     implementation 'com.airbnb.android:lottie-compose:4.2.0'
+
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxJavaVersion"
 }
 
 kapt {

@@ -4,28 +4,25 @@ import com.example.newsappcompose.model.NewsModel
 import com.example.newsappcompose.service.NewsAPI
 import com.example.newsappcompose.util.Constants.API_KEY
 import com.example.newsappcompose.util.Resource
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ActivityScoped
+import io.reactivex.Single
+import retrofit2.Call
+import retrofit2.Response
 import javax.inject.Inject
-import javax.inject.Scope
-import javax.inject.Singleton
 
 
 @ActivityScoped
 class NewsRepository @Inject constructor(
     private val api : NewsAPI
 ){
-    suspend fun getNewsList(): Resource<NewsModel>{
-        val response = try {
-            api.getAllNews("us",API_KEY)
-        }catch (e:Exception){
-            return Resource.Error("NewsRepository-getNewsList doesn't work.")
-        }
+     suspend fun getNewsList(): Resource<Response<NewsModel>>{
+        val response = api.getAllNews("us",1,API_KEY)
 
         return Resource.Success(response)
     }
 
-    suspend fun getSearchNews(searchText : String): Resource<NewsModel>{
+     suspend fun getSearchNews(searchText : String): Resource<NewsModel>{
+
         val response = try {
             api.getSearchNews(searchText,1, API_KEY)
         }catch (e:Exception){
@@ -35,3 +32,11 @@ class NewsRepository @Inject constructor(
     }
 
 }
+
+/*
+val response = try {
+            api.getAllNews("us",1,API_KEY)
+        }catch (e:Exception){
+            return Resource.Error("NewsRepository-getNewsList doesn't work.")
+        }
+ */

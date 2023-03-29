@@ -4,8 +4,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newsappcompose.model.Article
-import com.example.newsappcompose.model.NewsModel
-import com.example.newsappcompose.model.Source
 import com.example.newsappcompose.repository.NewsRepository
 import com.example.newsappcompose.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,18 +20,28 @@ class HomeViewModel @Inject constructor(
         var errorMessage = mutableStateOf("")
         var isLoading = mutableStateOf(false)
 
+    init {
+        loadNews()
+    }
     fun loadNews(){
         viewModelScope.launch {
             isLoading.value = true
             val result = repository.getNewsList()
             when(result){
                 is Resource.Success -> {
-                   val news = result.data!!.articles.mapIndexed { index, article ->
+
+                    val news = result.data!!.body().apply {
+                        this!!.articles
+                    }
+
+                 /*  val news = result.data!!.articles.mapIndexed { index, article ->
                        Article(article.author,article.content,article.description,article.publishedAt,article.source,article.title,article.url,article.urlToImage)
+
                    }
+                  */
                     errorMessage.value=""
                     isLoading.value=false
-                    newsList.value += news
+                    newsList.value = news!!.articles
 
                 }
                 is Resource.Error -> {
