@@ -3,9 +3,12 @@ package com.example.newsappcompose.service
 import com.example.newsappcompose.model.NewsModel
 import com.example.newsappcompose.util.Constants.API_KEY
 import com.example.newsappcompose.util.Resource
+import io.reactivex.Single
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
+import javax.inject.Singleton
 
 interface NewsAPI {
 
@@ -14,18 +17,20 @@ interface NewsAPI {
     //https://newsapi.org/v2/top-headlines?country=us&apiKey=API_KEY
 
     //for ListScreen
-    @GET("top-headlines")
-    fun getAllNews(
+    @GET("v2/top-headlines")
+    suspend fun getAllNews(
         @Query("country")
         country: String = "us",
+        @Query("page")
+        page: Int = 1,
         @Query("apiKey")
         apiKey: String = API_KEY
-    ): NewsModel
+    ):Response<NewsModel>
 
 
     //for SearchScreen
     @GET("everything")
-    fun getSearchNews(
+    suspend fun getSearchNews(
         @Query("q")
         searchQuery: String,
         @Query("page")

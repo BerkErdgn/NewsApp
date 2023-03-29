@@ -22,7 +22,7 @@ fun HomeScreen(navController: NavHostController = rememberNavController()){
     Scaffold (
         bottomBar ={ BottomBar(navController = navController) }
             ){
-            HomeNavGraph(navController = navController)
+            HomeNavGraph(navController)
     }
 }
 

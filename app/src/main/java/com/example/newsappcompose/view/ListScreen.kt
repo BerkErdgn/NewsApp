@@ -20,7 +20,6 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import coil.compose.rememberImagePainter
 import com.example.newsappcompose.graphs.Graph
 import com.example.newsappcompose.model.Article
@@ -32,16 +31,18 @@ import androidx.navigation.NavController
 
 
 @Composable
-fun NewsList(navController: NavController,viewModel: HomeViewModel = hiltViewModel()){
+fun NewsList(navController: NavController, viewModel: HomeViewModel = hiltViewModel()){
     val articleList by remember {viewModel.newsList}
     val errorMessage by remember {viewModel.errorMessage}
     val isLoading by remember {viewModel.isLoading}
+
+
 
     NewsListView(articles = articleList, navController = navController)
 
     Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
         if (isLoading){
-            CircularProgressIndicator(color = MaterialTheme.colors.primary)
+            CircularProgressIndicator(color = Color.Red)
         }
         if (errorMessage.isNotEmpty()){
             RetryView(error = errorMessage) {
