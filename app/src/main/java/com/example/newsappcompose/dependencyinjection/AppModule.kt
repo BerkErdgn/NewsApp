@@ -54,16 +54,3 @@ object AppModule {
 
 
 }
-
-/*
-@Singleton
-    @Provides
-    fun provideNewsApi(): NewsAPI{
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-            .create(NewsAPI::class.java)
-    }
- */

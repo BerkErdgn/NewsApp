@@ -7,17 +7,28 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.ExperimentalTextApi
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.newsappcompose.graphs.Graph
-import com.example.newsappcompose.ui.theme.custemPink
+import com.example.newsappcompose.ui.theme.*
 
 
+@OptIn(ExperimentalTextApi::class)
 @Composable
 fun SecondeSplashScreen(navController: NavHostController){
 
@@ -28,21 +39,29 @@ fun SecondeSplashScreen(navController: NavHostController){
 
         //For LottieAnimation
 
-        //val composition by rememberLottieComposition(spec = LottieCompositionSpec.Url("https://assets2.lottiefiles.com/packages/lf20_2LdLki.json"))
-        //LottieAnimation(composition = composition, iterations =LottieConstants.IterateForever )
+        val composition by rememberLottieComposition(spec = LottieCompositionSpec.Url("https://assets2.lottiefiles.com/packages/lf20_2LdLki.json"))
+        LottieAnimation(composition = composition, iterations = LottieConstants.IterateForever )
 
         Spacer(modifier = Modifier.padding(3.dp))
 
         //For Text
-        val preamble = "You have come to the right place to learn the latest and accurate news. Come in."
-        Text(modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 5.dp, top = 5.dp, end = 5.dp)
-            .width(200.dp)
-            , text = preamble,
-            fontSize = 15.sp,
-            textAlign = TextAlign.Center
-            )
+
+        val textColor = listOf(customRealRed,customRed, customOrange, customYellow, customGreen, customBlue, customBlur)
+
+        Text(text = buildAnnotatedString {
+            append("You have come to the ")
+            withStyle(
+                SpanStyle(
+                    brush = Brush.linearGradient(
+                        colors = textColor
+                        )
+                    )
+                ){
+                    append("right place to learn ")
+                }
+                append("the latest and accurate news. Come in.")
+
+        })
 
         Spacer(modifier = Modifier.padding(5.dp))
 

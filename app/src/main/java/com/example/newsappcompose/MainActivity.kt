@@ -23,7 +23,6 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             NewsAppComposeTheme {
-                val navController = rememberNavController()
                 RootNavigationGraph(navController =  rememberNavController())
 
             }

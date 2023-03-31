@@ -29,14 +29,14 @@ interface NewsAPI {
 
 
     //for SearchScreen
-    @GET("everything")
+    @GET("v2/everything")
     suspend fun getSearchNews(
         @Query("q")
-        searchQuery: String,
+        searchQuery: String ,
         @Query("page")
         pageNumber : Int = 1,
         @Query("apiKey")
         apiKEy: String = API_KEY
-    ): NewsModel
+    ): Response<NewsModel>
 
 }

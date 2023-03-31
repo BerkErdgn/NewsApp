@@ -23,11 +23,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberImagePainter
 import com.example.newsappcompose.graphs.Graph
 import com.example.newsappcompose.model.Article
-import com.example.newsappcompose.ui.theme.customGrey
 import com.example.newsappcompose.viewmodel.HomeViewModel
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.newsappcompose.ui.theme.customWhite
 
 
 @Composable
@@ -59,7 +62,10 @@ fun NewsList(navController: NavController, viewModel: HomeViewModel = hiltViewMo
 fun NewsListView(articles:List<Article>,navController: NavController){
     LazyColumn(contentPadding = PaddingValues(5.dp)){
         items(articles){ article ->
-            NewsRow(navController = navController, article = article)
+            if (article.author != null){
+                NewsRow(navController = navController, article = article)
+            }
+
         }
     }
 
@@ -67,10 +73,13 @@ fun NewsListView(articles:List<Article>,navController: NavController){
 
 @Composable
 fun NewsRow(navController: NavController, article : Article){
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(color = customGrey)
+            .fillMaxHeight(45f)
+            .background(color = customWhite)
+            .padding(7.dp)
             .clickable {
                 navController.navigate(Graph.DETAILS)
             }
@@ -78,31 +87,42 @@ fun NewsRow(navController: NavController, article : Article){
         Image(painter = rememberImagePainter(data = article.urlToImage),
             contentDescription = "Image",
             modifier = Modifier
-                .size(150.dp, 150.dp)
+                .size(150.dp,150.dp)
                 .clip(RectangleShape)
                 .padding(2.dp)
         )
         Column {
             Text(text = article.title,
-            style = MaterialTheme.typography.h2,
+            style = MaterialTheme.typography.h4,
             modifier = Modifier
-                .padding(2.dp),
-            fontWeight = FontWeight.Bold)
+                .fillMaxWidth()
+                .fillMaxHeight(9f),
+            fontWeight = FontWeight.Bold,
+            fontSize = 14.sp)
 
             Text(text = article.content,
                 style = MaterialTheme.typography.h5,
                 modifier = Modifier
+                    .fillMaxSize()
                     .padding(2.dp),
-                fontWeight = FontWeight.Bold)
+                maxLines =4,
+                overflow = TextOverflow.Ellipsis,
+                fontSize = 12.sp,
+                fontStyle = FontStyle.Italic)
 
             Text(text = article.author,
                 style = MaterialTheme.typography.h6,
                 modifier = Modifier
-                    .padding(2.dp),
-                fontWeight = FontWeight.ExtraLight)
+                    .fillMaxWidth()
+                    .fillMaxHeight(30f),
+                fontWeight = FontWeight.ExtraLight,
+                fontSize = 10.sp,
+                textAlign = TextAlign.End)
 
         }
     }
+
+    Spacer(modifier = Modifier.padding(5.dp))
 
 }
 
@@ -121,4 +141,6 @@ fun RetryView(error:String, onRetry: () -> Unit){
     }
 
 }
+
+
 

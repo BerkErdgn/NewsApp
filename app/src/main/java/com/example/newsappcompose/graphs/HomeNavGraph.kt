@@ -1,7 +1,11 @@
 package com.example.newsappcompose.graphs
 
 
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -9,9 +13,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.newsappcompose.BottomBarScreen
-import com.example.newsappcompose.view.NewsDetailsScreen
-import com.example.newsappcompose.view.NewsList
-import com.example.newsappcompose.view.ScreenContent
+import com.example.newsappcompose.view.*
 import com.example.newsappcompose.viewmodel.HomeViewModel
 
 
@@ -27,7 +29,8 @@ fun HomeNavGraph(navController: NavHostController) {
 
         }
         composable(route = BottomBarScreen.SEARCH.route) {
-            NewsList(navController = navController)
+            NewsSearchScreen(navController = navController)
+
         }
         composable(route = BottomBarScreen.SAVE.route) {
             ScreenContent(

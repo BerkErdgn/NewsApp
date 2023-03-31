@@ -33,12 +33,6 @@ class HomeViewModel @Inject constructor(
                     val news = result.data!!.body().apply {
                         this!!.articles
                     }
-
-                 /*  val news = result.data!!.articles.mapIndexed { index, article ->
-                       Article(article.author,article.content,article.description,article.publishedAt,article.source,article.title,article.url,article.urlToImage)
-
-                   }
-                  */
                     errorMessage.value=""
                     isLoading.value=false
                     newsList.value = news!!.articles
