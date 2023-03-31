@@ -16,12 +16,16 @@ class NewsRepository @Inject constructor(
     private val api : NewsAPI
 ){
      suspend fun getNewsList(): Resource<Response<NewsModel>>{
-        val response = api.getAllNews("us",1,API_KEY)
+        val response = try{
+            api.getAllNews("us",1,API_KEY)
+        }catch (e:Exception){
+            return Resource.Error("NewsRepository-getNewsList doesn't work.")
+        }
 
         return Resource.Success(response)
     }
 
-     suspend fun getSearchNews(searchText : String): Resource<NewsModel>{
+     suspend fun getSearchNews(searchText : String): Resource<Response<NewsModel>>{
 
         val response = try {
             api.getSearchNews(searchText,1, API_KEY)
@@ -32,11 +36,3 @@ class NewsRepository @Inject constructor(
     }
 
 }
-
-/*
-val response = try {
-            api.getAllNews("us",1,API_KEY)
-        }catch (e:Exception){
-            return Resource.Error("NewsRepository-getNewsList doesn't work.")
-        }
- */
