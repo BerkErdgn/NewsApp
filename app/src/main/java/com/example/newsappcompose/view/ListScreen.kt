@@ -62,7 +62,7 @@ fun NewsList(navController: NavController, viewModel: HomeViewModel = hiltViewMo
 fun NewsListView(articles:List<Article>,navController: NavController){
     LazyColumn(contentPadding = PaddingValues(5.dp)){
         items(articles){ article ->
-            if (article.author != null){
+            if (article.author != null && article.title != null && article.content != null && article.urlToImage != null && article.url != null){
                 NewsRow(navController = navController, article = article)
             }
 
@@ -81,7 +81,9 @@ fun NewsRow(navController: NavController, article : Article){
             .background(color = customWhite)
             .padding(7.dp)
             .clickable {
-                navController.navigate(Graph.DETAILS)
+               // navController.navigate("news_detail_screen/${article.author}/${article.content}/${article.publishedAt}/${article.url}/${article.title}/${article.urlToImage}")
+                navController.navigate("details_graph/${article.title.subSequence(0,50)}")
+
             }
     ) {
         Image(painter = rememberImagePainter(data = article.urlToImage),

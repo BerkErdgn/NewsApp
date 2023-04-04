@@ -35,4 +35,15 @@ class NewsRepository @Inject constructor(
         return Resource.Success(response)
     }
 
+
+    suspend fun getOneNews(newsContentQuery : String): Resource<NewsModel>{
+        val response = try {
+            api.getOneNews(newsContentQuery,1, API_KEY)
+        }catch (e:Exception){
+            return Resource.Error("NewsRepository-getOneNews doesn't work.")
+        }
+        return  Resource.Success(response)
+    }
+
+
 }
