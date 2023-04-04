@@ -39,4 +39,14 @@ interface NewsAPI {
         apiKEy: String = API_KEY
     ): Response<NewsModel>
 
+    @GET("v2/everything")
+    suspend fun getOneNews(
+        @Query("q")
+        newsContentQuery: String ,
+        @Query("page")
+        pageNumber : Int = 1,
+        @Query("apiKey")
+        apiKEy: String = API_KEY
+    ): NewsModel
+
 }
