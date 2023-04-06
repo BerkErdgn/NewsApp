@@ -1,6 +1,11 @@
 package com.example.newsappcompose.repository
 
+import androidx.lifecycle.LiveData
+import androidx.room.Room
+import androidx.room.util.newStringBuilder
 import com.example.newsappcompose.model.NewsModel
+import com.example.newsappcompose.model.RoomModel
+import com.example.newsappcompose.roomdb.NewsDao
 import com.example.newsappcompose.service.NewsAPI
 import com.example.newsappcompose.util.Constants.API_KEY
 import com.example.newsappcompose.util.Resource
@@ -13,8 +18,11 @@ import javax.inject.Inject
 
 @ActivityScoped
 class NewsRepository @Inject constructor(
+    private val newsDao: NewsDao,
     private val api : NewsAPI
 ){
+
+    //for retrofit
      suspend fun getNewsList(): Resource<Response<NewsModel>>{
         val response = try{
             api.getAllNews("us",1,API_KEY)
@@ -44,6 +52,21 @@ class NewsRepository @Inject constructor(
         }
         return  Resource.Success(response)
     }
+
+    //for Room
+
+    suspend fun insertNews(news: RoomModel){
+        newsDao.insertNews(news)
+    }
+
+    suspend fun deleteNews(news: RoomModel){
+        newsDao.deleteArt(news)
+    }
+
+     fun getNews(): LiveData<List<RoomModel>>{
+        return newsDao.observeNews()
+    }
+
 
 
 }

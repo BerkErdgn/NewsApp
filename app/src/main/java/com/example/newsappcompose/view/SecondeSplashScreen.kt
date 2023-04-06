@@ -30,7 +30,7 @@ import com.example.newsappcompose.ui.theme.*
 
 @OptIn(ExperimentalTextApi::class)
 @Composable
-fun SecondeSplashScreen(navController: NavHostController){
+fun SecondSplashScreen(navController: NavHostController){
 
     Column (modifier = Modifier
         .fillMaxSize(),
@@ -68,8 +68,8 @@ fun SecondeSplashScreen(navController: NavHostController){
 
         //For button
         Button(onClick = {
-            navController.popBackStack()
             navController.navigate(Graph.HOME)
+            //navController.popBackStack()
         },
             colors = ButtonDefaults.buttonColors(backgroundColor = custemPink),
             shape = CutCornerShape(10.dp),

@@ -1,11 +1,16 @@
 package com.example.newsappcompose.dependencyinjection
 
+import android.content.Context
+import androidx.room.Room
 import com.example.newsappcompose.repository.NewsRepository
+import com.example.newsappcompose.roomdb.NewsDao
+import com.example.newsappcompose.roomdb.NewsDatabase
 import com.example.newsappcompose.service.NewsAPI
 import com.example.newsappcompose.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -23,8 +28,9 @@ object AppModule {
     @Singleton
     @Provides
     fun provideNewsRepository(
-        api: NewsAPI
-    )= NewsRepository(api)
+        newsDao: NewsDao,
+        api: NewsAPI,
+    )= NewsRepository(newsDao,api)
 
 
 
@@ -51,6 +57,17 @@ object AppModule {
         }
         return api
     }
+
+    @Singleton
+    @Provides
+    fun injectRoomDatabase(
+        @ApplicationContext context: Context)= Room.databaseBuilder(
+        context,NewsDatabase::class.java,"newsdb"
+        ).build()
+
+   @Singleton
+   @Provides
+   fun injectDao(database: NewsDatabase) = database.newsDao()
 
 
 }

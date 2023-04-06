@@ -1,9 +1,7 @@
 package com.example.newsappcompose
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.*
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class BottomBarScreen(
@@ -20,12 +18,12 @@ sealed class BottomBarScreen(
     object SEARCH : BottomBarScreen(
         route = "SEARCH",
         title = "SEARCH",
-        icon = Icons.Default.Person
+        icon = Icons.Default.Search
     )
 
     object SAVE : BottomBarScreen(
-        route = "SETTINGS",
-        title = "SETTINGS",
-        icon = Icons.Default.Settings
+        route = "SAVE",
+        title = "SAVE",
+        icon = Icons.Default.Save
     )
 }
