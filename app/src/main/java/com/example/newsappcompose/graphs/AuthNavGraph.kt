@@ -6,7 +6,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.newsappcompose.view.FirstSplashScreen
-import com.example.newsappcompose.view.SecondeSplashScreen
+import com.example.newsappcompose.view.SecondSplashScreen
+
 
 
 fun NavGraphBuilder.authNavGraph(navController : NavHostController){
@@ -19,17 +20,17 @@ fun NavGraphBuilder.authNavGraph(navController : NavHostController){
                 FirstSplashScreen(
                     onClick = {
                         navController.popBackStack()
-                        navController.navigate(AuthScreen.Seconde.route)
+                        navController.navigate(AuthScreen.Second.route)
                     })
             }
-            composable(route =AuthScreen.Seconde.route ){
-                SecondeSplashScreen(navController = navController)
+            composable(route =AuthScreen.Second.route ){
+                SecondSplashScreen(navController = navController)
             }
         }
 }
 
 
 sealed class AuthScreen (val route: String){
-    object First : AuthScreen(route = "LOGIN")
-    object Seconde : AuthScreen(route = "Seconde_Screen")
+    object First : AuthScreen(route = "FIRS")
+    object Second : AuthScreen(route = "SECOND")
 }

@@ -21,7 +21,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberImagePainter
-import com.example.newsappcompose.graphs.Graph
 import com.example.newsappcompose.model.Article
 import com.example.newsappcompose.viewmodel.HomeViewModel
 import androidx.compose.runtime.getValue
@@ -82,7 +81,7 @@ fun NewsRow(navController: NavController, article : Article){
             .padding(7.dp)
             .clickable {
                // navController.navigate("news_detail_screen/${article.author}/${article.content}/${article.publishedAt}/${article.url}/${article.title}/${article.urlToImage}")
-                navController.navigate("details_graph/${article.title.subSequence(0,50)}")
+                navController.navigate("details_graph/${article.title}")
 
             }
     ) {

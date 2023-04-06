@@ -6,10 +6,7 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -23,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.newsappcompose.AppNameText
 import com.example.newsappcompose.model.Article
 import com.example.newsappcompose.model.NewsModel
 import com.example.newsappcompose.model.Source
@@ -30,12 +28,14 @@ import com.example.newsappcompose.ui.theme.custemPink
 import com.example.newsappcompose.ui.theme.customWhite
 import com.example.newsappcompose.util.Resource
 import com.example.newsappcompose.viewmodel.OneNewsViewModel
+import com.example.newsappcompose.viewmodel.SavedNewsViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Response
 
 @Composable
 fun detailView(content: String,
-    viewModel : OneNewsViewModel = hiltViewModel()
+    viewModel : OneNewsViewModel = hiltViewModel(),
+    saveViewModel: SavedNewsViewModel = hiltViewModel()
                ){
 
     val oneNews = produceState<Resource<NewsModel>>(initialValue = Resource.Loading()){
@@ -45,34 +45,44 @@ fun detailView(content: String,
 
     when(oneNews){
         is Resource.Success ->{
-            Box(modifier = Modifier
-                .fillMaxSize()
-                .padding(2.dp)){
-                //For we can see website in app directly
-                AndroidView(factory = {
-                    WebView(it).apply {
-                        layoutParams = ViewGroup.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.MATCH_PARENT
-                        )
+            Column(modifier = Modifier.fillMaxSize()) {
+                AppNameText()
+                Box(modifier = Modifier
+                    .fillMaxSize()
+                    .padding(2.dp)){
 
-                        webViewClient = WebViewClient()
-                        loadUrl(oneNews.data!!.articles[0].url)
+                    //For we can see website in app directly
+                    AndroidView(factory = {
+                        WebView(it).apply {
+                            layoutParams = ViewGroup.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.MATCH_PARENT
+                            )
 
+                            webViewClient = WebViewClient()
+                            loadUrl(oneNews.data!!.articles[0].url)
+
+                        }
+                    }, update = {
+                        it.loadUrl(oneNews.data!!.articles[0].url)
+
+
+                    })
+
+                    Row(modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(5.dp)) {
+                        customFloatingButton {
+                            println("Kaydetti")
+                            val saveNews= oneNews.data!!.articles[0]
+                            println(saveNews.author)
+                            saveViewModel.saveNews(saveNews.author,saveNews.content,saveNews.description,saveNews.publishedAt,saveNews.title,saveNews.url,saveNews.urlToImage)
+                        }
                     }
-                }, update = {
-                    it.loadUrl(oneNews.data!!.articles[0].url)
 
-
-                })
-
-                Row(modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(5.dp)) {
-                    customFloatingButton {}
                 }
-
             }
+
         }
         is Resource.Error ->{
             Text(text = oneNews.message!!)
