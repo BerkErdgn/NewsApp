@@ -22,8 +22,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
-
     //In this way, it can be easily injected into the viewmodel.
     @Singleton
     @Provides
@@ -31,8 +29,6 @@ object AppModule {
         newsDao: NewsDao,
         api: NewsAPI,
     )= NewsRepository(newsDao,api)
-
-
 
     @Singleton
     @Provides

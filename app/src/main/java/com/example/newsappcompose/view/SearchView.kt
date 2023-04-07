@@ -7,7 +7,6 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
@@ -16,14 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.newsappcompose.viewmodel.SearchViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
-import okhttp3.internal.wait
 
 @Composable
 fun NewsSearchScreen(navController: NavController,viewModel: SearchViewModel= hiltViewModel()){
@@ -64,9 +60,6 @@ fun SearchView (navController: NavController,viewModel: SearchViewModel = hiltVi
             println(errorMessage)
         }
     }
-
-
-
 }
 
 
@@ -104,13 +97,10 @@ fun SearchBar(
                     isHintDisplayed = it.isFocused != true && text.isEmpty()
                 })
 
-
         if (isHintDisplayed){
             Text(text = hint,
                 color = Color.LightGray,
                 modifier = Modifier.padding(20.dp))
         }
     }
-
-
 }

@@ -1,19 +1,16 @@
 package com.example.newsappcompose.view
 
-import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -22,19 +19,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberImagePainter
 import com.example.newsappcompose.model.RoomModel
 import com.example.newsappcompose.ui.theme.customWhite
-import kotlinx.coroutines.runBlocking
+import java.util.*
 
 
 @Composable
@@ -42,22 +36,25 @@ fun savedNewsView(navController: NavController, viewModel: SavedNewsViewModel = 
 
    val savedNewsList = viewModel.newsList.observeAsState(listOf()).value
 
-
     if (savedNewsList.isNotEmpty()){
         SavedNewsListView(articles = savedNewsList, navController = navController,viewModel)
     }else{
-        println("Boş")
+         Column(modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+             ) {
+             Text(text = "You didn't save any news. Save one now if you want ❤️ ",
+
+             fontSize = 13.sp,
+             textAlign = TextAlign.Center)
+         }
     }
-
-
-
-
-
 }
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SavedNewsListView(articles:List<RoomModel>,navController: NavController,viewModel: SavedNewsViewModel = hiltViewModel()){
+    Collections.reverse(articles)  //it make listview show first most recently added in compose
     LazyColumn(contentPadding = PaddingValues(5.dp),
                 reverseLayout = true){
             itemsIndexed(items = articles,key = {_,article->
@@ -99,7 +96,6 @@ fun SavedNewsListView(articles:List<RoomModel>,navController: NavController,view
 }
 
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SavedNewsRow(navController: NavController, article : RoomModel){
     Row(
@@ -109,9 +105,7 @@ fun SavedNewsRow(navController: NavController, article : RoomModel){
             .background(color = customWhite)
             .padding(7.dp)
             .clickable {
-                // navController.navigate("news_detail_screen/${article.author}/${article.content}/${article.publishedAt}/${article.url}/${article.title}/${article.urlToImage}")
                 navController.navigate("details_graph/${article.title}")
-
             }
     ) {
         Image(painter = rememberImagePainter(data = article.urlToImage),
@@ -148,21 +142,10 @@ fun SavedNewsRow(navController: NavController, article : RoomModel){
                 fontWeight = FontWeight.ExtraLight,
                 fontSize = 10.sp,
                 textAlign = TextAlign.End)
-
         }
     }
-
     Spacer(modifier = Modifier.padding(5.dp))
-
 }
 
 
 
-
-//LazyColumn(contentPadding = PaddingValues(5.dp)){
-//        items(articles){ article ->
-//            if (article.author != null && article.title != null && article.content != null && article.urlToImage != null && article.url != null) {
-//                SavedNewsRow(navController = navController, article = article)
-//            }
-//        }
-//    }
