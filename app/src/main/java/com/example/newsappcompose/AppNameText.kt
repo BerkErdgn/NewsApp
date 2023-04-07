@@ -1,7 +1,6 @@
 package com.example.newsappcompose
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
@@ -12,11 +11,11 @@ import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.newsappcompose.ui.theme.*
 
+@SuppressLint("SuspiciousIndentation")
 @OptIn(ExperimentalTextApi::class)
 @Composable
 fun AppNameText(){

@@ -4,11 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.room.Room
 import com.example.newsappcompose.model.RoomModel
-import com.example.newsappcompose.model.Source
 import com.example.newsappcompose.repository.NewsRepository
-import com.example.newsappcompose.roomdb.NewsDatabase
 import com.example.newsappcompose.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -50,6 +47,4 @@ class SavedNewsViewModel @Inject constructor(
         insertNews(savedNews)
         insertNewsMsg.postValue(Resource.Success(savedNews))
     }
-
-
 }

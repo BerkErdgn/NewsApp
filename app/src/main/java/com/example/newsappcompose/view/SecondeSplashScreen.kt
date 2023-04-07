@@ -15,11 +15,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
@@ -28,9 +26,11 @@ import com.example.newsappcompose.graphs.Graph
 import com.example.newsappcompose.ui.theme.*
 
 
+
+
 @OptIn(ExperimentalTextApi::class)
 @Composable
-fun SecondSplashScreen(navController: NavHostController){
+fun SecondSplashScreen(navController: NavController){
 
     Column (modifier = Modifier
         .fillMaxSize(),
@@ -39,15 +39,13 @@ fun SecondSplashScreen(navController: NavHostController){
 
         //For LottieAnimation
 
-        val composition by rememberLottieComposition(spec = LottieCompositionSpec.Url("https://assets2.lottiefiles.com/packages/lf20_2LdLki.json"))
+        val composition by rememberLottieComposition(spec = LottieCompositionSpec.Url("//https://assets2.lottiefiles.com/packages/lf20_2LdLki.json"))
         LottieAnimation(composition = composition, iterations = LottieConstants.IterateForever )
 
         Spacer(modifier = Modifier.padding(3.dp))
 
         //For Text
-
         val textColor = listOf(customRealRed,customRed, customOrange, customYellow, customGreen, customBlue, customBlur)
-
         Text(text = buildAnnotatedString {
             append("You have come to the ")
             withStyle(
@@ -63,13 +61,15 @@ fun SecondSplashScreen(navController: NavHostController){
 
         })
 
+
+
         Spacer(modifier = Modifier.padding(5.dp))
 
 
         //For button
         Button(onClick = {
+            navController.popBackStack()
             navController.navigate(Graph.HOME)
-            //navController.popBackStack()
         },
             colors = ButtonDefaults.buttonColors(backgroundColor = custemPink),
             shape = CutCornerShape(10.dp),
@@ -88,12 +88,13 @@ fun SecondSplashScreen(navController: NavHostController){
     }
 
 }
+
+
 //For Preview
 /*
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview(){
-    SecondeSplashScreen()
+    SecondSplashScreen()
 }
-
  */

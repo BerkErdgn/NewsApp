@@ -1,8 +1,6 @@
 package com.example.newsappcompose.repository
 
 import androidx.lifecycle.LiveData
-import androidx.room.Room
-import androidx.room.util.newStringBuilder
 import com.example.newsappcompose.model.NewsModel
 import com.example.newsappcompose.model.RoomModel
 import com.example.newsappcompose.roomdb.NewsDao
@@ -10,8 +8,6 @@ import com.example.newsappcompose.service.NewsAPI
 import com.example.newsappcompose.util.Constants.API_KEY
 import com.example.newsappcompose.util.Resource
 import dagger.hilt.android.scopes.ActivityScoped
-import io.reactivex.Single
-import retrofit2.Call
 import retrofit2.Response
 import javax.inject.Inject
 

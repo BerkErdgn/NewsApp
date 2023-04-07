@@ -39,7 +39,6 @@ fun NewsList(navController: NavController, viewModel: HomeViewModel = hiltViewMo
     val isLoading by remember {viewModel.isLoading}
 
 
-
     NewsListView(articles = articleList, navController = navController)
 
     Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
@@ -51,9 +50,7 @@ fun NewsList(navController: NavController, viewModel: HomeViewModel = hiltViewMo
                 viewModel.loadNews()
             }
         }
-
     }
-
 }
 
 
@@ -67,7 +64,6 @@ fun NewsListView(articles:List<Article>,navController: NavController){
 
         }
     }
-
 }
 
 @Composable
@@ -80,9 +76,7 @@ fun NewsRow(navController: NavController, article : Article){
             .background(color = customWhite)
             .padding(7.dp)
             .clickable {
-               // navController.navigate("news_detail_screen/${article.author}/${article.content}/${article.publishedAt}/${article.url}/${article.title}/${article.urlToImage}")
                 navController.navigate("details_graph/${article.title}")
-
             }
     ) {
         Image(painter = rememberImagePainter(data = article.urlToImage),
@@ -119,14 +113,10 @@ fun NewsRow(navController: NavController, article : Article){
                 fontWeight = FontWeight.ExtraLight,
                 fontSize = 10.sp,
                 textAlign = TextAlign.End)
-
         }
     }
-
     Spacer(modifier = Modifier.padding(5.dp))
-
 }
-
 
 @Composable
 fun RetryView(error:String, onRetry: () -> Unit){

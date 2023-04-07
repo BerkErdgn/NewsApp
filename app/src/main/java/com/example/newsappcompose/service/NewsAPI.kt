@@ -2,13 +2,9 @@ package com.example.newsappcompose.service
 
 import com.example.newsappcompose.model.NewsModel
 import com.example.newsappcompose.util.Constants.API_KEY
-import com.example.newsappcompose.util.Resource
-import io.reactivex.Single
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
-import javax.inject.Singleton
 
 interface NewsAPI {
 
