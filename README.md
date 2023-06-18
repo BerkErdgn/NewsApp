@@ -9,6 +9,19 @@ The news application called "NewsApp" is a customizable and user-friendly news a
 
 
 
+## Technologies Used
+- Jetpack Compose
+- MVVM
+- Corutines
+- LiveData
+- Room
+- Dagger Hilt
+- Retrofit
+- Navigation
+- LottieFiles
+
+
+
 ## API Usage
 
 - Base Url:
